@@ -24,9 +24,11 @@ In order to both merge and harmonize the restaurant data fetched from the given 
 
 # Issues, Future Considerations and "What I would do if given more time"
 ### Data given is very "repetitive" with its duplicates, some fields are very similar despite having different names
-    An alternative to deal with this issue could be via a fuzzy matching algorithm to account for less "false positives" when it comes to name comparisons
-### Some addresses are partly written, with the same address being written in different ways (some shortened, some in full, for instance)
-    To tackle this issue, there could have been used some better string normalization libraries to normalize the addresses in its entirety, rather than doing so manually
+    This particulary affects strings that are very similar (e.g. "J  D PRODUCE INC" vs "JD PRODUCE INC" which are very similar bar the whitespace)
+    A potential solution to deal with this issue could be via the implementation of a fuzzy matching algorithm to account for less "false positives" when it comes to name comparisons
+### Some columns are partly written, with the same columns being written in different ways (some shortened, some in full, for instance)
+    This is a significant issue visible in some fields (e.g. "USPS" vs "USPS MID ISLAND P  DC", in which address, city and zipcode are exactly the same)
+    To tackle this issue, we could have used some better string normalization libraries to normalize the addresses in its entirety, rather than doing so manually
     We could also geocode addresses (with APIs like Google Maps or others as such) to minimize duplicates, which seem very recurrent
 ### One column is generated per file in order to identify its origin, on the final dataset
     This could be problematic in the way that, if we have 10000 input files, we'd have 10000 additional columns (making it REALLY cumbersome to manage the final dataset)
